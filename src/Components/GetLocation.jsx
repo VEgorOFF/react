@@ -1,12 +1,12 @@
 import { useState } from "react";
+import GetApi from "./GetApi";
 
 function GetLocation() {
-  const [userLocation, setUserLocation] = useState("координаты");
+  const [userLocation, setUserLocation] = useState(null);
 
   const getLocationUser = () => {
-    console.log("worked");
     if (!navigator.geolocation) {
-      alert("Ваш браузер не дружит с геолокацией...");
+      alert("Ваш браузер не поддерживает геолокацию...");
     } else {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -14,14 +14,23 @@ function GetLocation() {
           setUserLocation({ longitude, latitude });
         },
         (error) => {
-          alert("Не получается определить вашу геолокацию :(", error);
+          alert("Не удалось определить геолокацию: ", error.message);
         }
       );
     }
-    document.querySelector(".coordinates").innerHTML = userLocation;
   };
 
-  return <button onClick={getLocationUser}>Получить местоположение</button>;
+  return (
+    <div>
+      <button onClick={getLocationUser}>Получить местоположение</button>
+      {userLocation && (
+        <div className="coordinates">
+          Longitude: {userLocation.longitude}, Latitude: {userLocation.latitude}
+          <GetApi longitude={userLocation.longitude} latitude={userLocation.latitude} />
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default GetLocation;

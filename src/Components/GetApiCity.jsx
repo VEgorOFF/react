@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
-function GetApi(props) {
+function GetApiCity({ value }) {
+  console.log("worked GetApiCity");
   const [data, setData] = useState(null); // Начальное состояние - null
   const [isLoading, setIsLoading] = useState(true); // Изначально загрузка
   const [error, setError] = useState(null); // Изначально нет ошибок
@@ -8,7 +9,7 @@ function GetApi(props) {
   useEffect(() => {
     async function fetchData() {
       const API = "67f053bf464c75b25e99fb74299aba79";
-      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${props.latitude}&lon=${props.longitude}&appid=${API}&units=metric`;
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${value}&appid=${API}&units=metric`;
       try {
         setIsLoading(true); // Начать загрузку
         const response = await fetch(url); // Асинхронный вызов
@@ -48,4 +49,4 @@ function GetApi(props) {
   );
 }
 
-export default GetApi;
+export default GetApiCity;

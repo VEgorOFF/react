@@ -1,13 +1,12 @@
 import "./App.css";
 import GetLocation from "./Components/GetLocation";
+import InputLocation from "./Components/InputLocation";
 
 function App() {
   return (
     <div className="weather-module">
-      <div className="city"></div>
-      <div className="description"></div>
-      <div className="coordinates"></div>
       <GetLocation />
+      <InputLocation />
 
       {/* <p>Longitude: {userLocation !== null ? userLocation.longitude : ""}</p>
       <p>Latitude: {userLocation !== null ? userLocation.latitude : ""}</p>

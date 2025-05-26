@@ -1,33 +1,16 @@
-import { useState } from "react";
-import GetApiCity from "./GetApiCity";
+import InputState from "./InputState";
+import ButtonState from "./ButtonState";
 
-function InputLocation() {
-  const [value, setValue] = useState("");
-  const [city, setCity] = useState(null);
-
-  const handleInputChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  const handleClick = (event) => {
-    event.preventDefault();
-
-    if (value.length === 0) {
-      return alert("Введите хоть чтото");
-    }
-
-    setCity(value);
-  };
-
+function InputLocation({ selectedOption }) {
   return (
     <div>
       <form action="">
-        <input type="text" placeholder="Введите город" onChange={handleInputChange} value={value}></input>
-        <button type="submit" onClick={handleClick}>
-          Отправить
-        </button>
+        <label>Введите город (например: "London", "Moscow")</label>
+        <div>
+          <InputState />
+          <ButtonState selectedOption={selectedOption} />
+        </div>
       </form>
-      {city && <GetApiCity value={city} />}
     </div>
   );
 }

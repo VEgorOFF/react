@@ -36,12 +36,13 @@ function GetApi(props) {
   }
 
   return (
-    <div>
+    <div className="result_weather-GPS_now">
       <h1>Данные:</h1>
       {data && (
         <div>
           <p>Город {data.name}</p>
           <p>Температура {data.main.temp} °C</p>
+          <img src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} alt="icon" />
         </div>
       )}
     </div>

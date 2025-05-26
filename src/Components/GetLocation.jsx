@@ -1,7 +1,8 @@
 import { useState } from "react";
 import GetApi from "./GetApi";
+import GetApiGpsFiveDays from "./GetApiGpsFiveDays";
 
-function GetLocation() {
+function GetLocation({ selectedOption }) {
   const [userLocation, setUserLocation] = useState(null);
 
   const getLocationUser = () => {
@@ -20,14 +21,25 @@ function GetLocation() {
     }
   };
 
+  const checkRadioButton = (selectedOption) => {
+    if (selectedOption === "now") {
+      return <GetApi longitude={userLocation.longitude} latitude={userLocation.latitude} />;
+    }
+    if (selectedOption === "fiveDays") {
+      return <GetApiGpsFiveDays longitude={userLocation.longitude} latitude={userLocation.latitude} />;
+    }
+  };
+
   return (
     <div>
       <button onClick={getLocationUser}>Получить местоположение</button>
       {userLocation && (
-        <div className="coordinates">
-          Longitude: {userLocation.longitude}, Latitude: {userLocation.latitude}
-          <GetApi longitude={userLocation.longitude} latitude={userLocation.latitude} />
-        </div>
+        <>
+          <div className="coordinates">
+            Длина: {userLocation.longitude}, Ширина: {userLocation.latitude}
+          </div>
+          {checkRadioButton(selectedOption)}
+        </>
       )}
     </div>
   );
